@@ -3872,6 +3872,22 @@ function! TagbarBalloonExpr() abort
     return taginfo.getPrototype(0)
 endfunction
 
+" TagbarGenerateStatusline() {{{2
+function! TagbarGenerateStatusline()
+    if g:tagbar_sort
+        let text = '[Name]'
+    else
+        let text = '[Order]'
+    endif
+
+    if !empty(s:known_files.getCurrent(0))
+        let filename = fnamemodify(s:known_files.getCurrent(0).fpath, ':t')
+        let text .= ' ' . filename
+    endif
+
+    return text
+endfunction
+
 " Debugging {{{1
 " s:StartDebug() {{{2
 function! s:StartDebug(filename) abort
